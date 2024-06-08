@@ -131,13 +131,20 @@ function consultarPorDocumento(documento) {
 function reiniciarFormulario() {
     document.querySelectorAll('.item-input').forEach(input => input.value = '');
     document.getElementById('tecnologia').selectedIndex = 0;
+    document.getElementById('tipiWeb').selectedIndex = 0;
     document.getElementById('tiposervicio').innerHTML = '<option value="">Tipo Servicio</option>';
     document.getElementById('naturaleza').innerHTML = '<option value="">Naturaleza</option>';
     document.getElementById('horario_b2b').selectedIndex = 0;
     document.getElementById('b2b-details').classList.add('input__group--items-llamada__oculto');
     document.getElementById('resultado').textContent = '';
     localStorage.clear();
+
+    // Enfocar en el campo id-llamada
+    document.getElementById('id-llamada').focus(); 
 }
 
 // Agregar el event listener al botón de reinicio
 document.getElementById('reiniciar').addEventListener('click', reiniciarFormulario);
+
+document.getElementById('id-llamada').focus();
+
