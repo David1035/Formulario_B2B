@@ -8,88 +8,66 @@
 </head>
 <body>
     <div class="formulario__capturar__datos">
-            <div class="main__container">
-                <div class="input__group--items input__group--items-llamada">
-                    <label for="id-llamada">ID</label>
-                    <input type="text" id="id-llamada" class="item-input">
-                </div>
-                <div class="input__group--items">
-                    <label for="nombre-client">NOMBRE</label>
-                    <input type="text" id="nombre-client" class="item-input">
-                </div>
-                <div class="input__group--items">
-                    <label for="document">DOCUMENTO</label>
-                    <input type="number" id="document" class="item-input">
-                </div>
-                <div class="input__group--items">
-                    <label for="smnet">SMNET</label>
-                    <input type="number" id="smnet" class="item-input">
-                </div>
-                <div class="input__group--items">
-                    <label for="tipiWeb">TIPIWEB</label>
-                    <input type="text" id="tipiWeb" class="item-input">
-                </div>
-                <div class="input__group--items input__group--items-llamada">
-                    <label for="observaciones">OBSERVACIONES</label>
-                    <input type="text" id="observaciones" class="item-input">
-                </div>
-                <div class="input__group--items input__group--items-llamada">
-                    <label for="observaciones">TECNOLOGIA</label>
-                    <input type="text" id="observaciones" class="item-input">
-                </div>
-
-                <div class="input-group">
-                    <label for="tecnologia">TECNOLOGIA</label>
-                    <select id="tecnologia">
-                        <option value="">Seleccione una tecnología</option>
-                        <option value="HFC">HFC</option>
-                        <option value="GPON">GPON</option>
-                        <option value="ADSL">ADSL</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label for="tiposervicio">TIPOSERVICIO</label>
-                    <select id="tiposervicio">
-                        <option value="">Seleccione un tipo de servicio</option>
-                    </select>
-                </div>
-                <div class="input__group--items input__group--items-llamada">
-                    <label for="observaciones">NATURALEZA</label>
-                    <input type="text" id="observaciones" class="item-input">
-                </div>
-                <div class="input__group--items input__group--items-llamada">
-                    <label for="observaciones">CELULAR</label>
-                    <input type="text" id="observaciones" class="item-input">
-                </div>
+        <div class="main__container">
+            <div class="input__group--items input__group--items-llamada">
+                <label for="id-llamada">ID</label>
+                <input type="text" id="id-llamada" class="item-input">
             </div>
+            <div class="input__group--items">
+                <label for="nombre-client">NOMBRE</label>
+                <input type="text" id="nombre-client" class="item-input">
+            </div>
+            <div class="input__group--items">
+                <label for="document">DOCUMENTO</label>
+                <input type="number" id="document" class="item-input">
+            </div>
+            <div class="input__group--items">
+                <label for="smnet">SMNET</label>
+                <input type="number" id="smnet" class="item-input">
+            </div>
+            <div class="input__group--items">
+                <label for="tipiWeb">TIPIWEB</label>
+                <select name="tipificó?" id="tipiWeb">
+                    <option value="">¿Tipificó?</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                </select>
+            </div>
+            <div class="input__group--items input__group--items-llamada">
+                <label for="observaciones">OBSERVACIONES</label>
+                <input type="text" id="observaciones">
+            </div>
+            <div class="input-group">
+                <label for="tecnologia">TECNOLOGIA</label>
+                <select id="tecnologia">
+                    <option value="">Tecnología</option>
+                    <option value="HFC">HFC</option>
+                    <option value="GPON">GPON</option>
+                    <option value="ADSL">ADSL</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="tiposervicio">TIPOSERVICIO</label>
+                <select id="tiposervicio">
+                    <option value="">Tipo Servicio</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="naturaleza">NATURALEZA</label>
+                <select id="naturaleza">
+                    <option value="">Naturaleza</option>
+                </select>
+            </div>
+            <div class="input__group--items input__group--items-llamada">
+                <button id="copiar">Copiar</button>
+            </div>
+            <div class="input__group--items input__group--items-llamada">
+                <label for="celular">CELULAR</label>
+                <input type="text" id="celular" class="item-input">
+            </div>
+        </div>
     </div>
-
-    <script>
-        document.getElementById('tecnologia').addEventListener('change', function() {
-            const tecnologia = this.value;
-            const tiposervicio = document.getElementById('tiposervicio');
-            tiposervicio.innerHTML = ''; // Limpiar opciones anteriores
-
-            const opciones = {
-                'HFC': ['Internet', 'Telefonía', 'TV_Digital', 'One_TV_2.0'],
-                'GPON': ['Internet', 'IPTV', 'Telefonía', 'One_TV_2.0'],
-                'ADSL': ['Internet', 'IPTV', 'Telefonía', 'One_TV_2.0']
-            };
-
-            if (opciones[tecnologia]) {
-                opciones[tecnologia].forEach(function(servicio) {
-                    const option = document.createElement('option');
-                    option.value = servicio;
-                    option.textContent = servicio;
-                    tiposervicio.appendChild(option);
-                });
-            } else {
-                const option = document.createElement('option');
-                option.value = '';
-                option.textContent = 'Seleccione un tipo de servicio';
-                tiposervicio.appendChild(option);
-            }
-        });
-    </script>
+    <p id="resultado"></p>
+    <script src="js/formulario.js"></script>
 </body>
 </html>
