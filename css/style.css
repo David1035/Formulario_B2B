@@ -5,25 +5,61 @@
 }
 
 .formulario__capturar__datos {
-    width: 80vh;
+    width: 95vh;
     margin: 0 auto;
 }
-
 .main__container {
     display: grid;
-    grid-template-columns: 1fr 3fr 3fr 3fr 3fr;
+    grid-template-columns: 1fr 2fr 2fr 2fr;
+    grid-template-rows:  1fr 1fr 1fr;
+
     gap: 10px;
-    width: 100%;
+    width: 100%;   
 }
 
-.input__group--items {
+.input__group--items, .input-group {
     text-align: center;
     width: 100%;
     height: 40px;
-    background-color: rgb(25, 219, 219);
+    background-color: rgb(221, 238, 174);
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
-
 .item-input {
     width: 100%;
     height: 20px;
+    border: 2px solid #ccc;
+    transition: border-color 0.3s;
+    border-radius: 5px;
+}
+
+.item-input:focus {
+    background-color: #b7e7b8;
+    outline: none;
+}
+.item-input:hover{
+    background-color: rgb(224, 215, 51);
+}
+.input__group--items-button{
+    display: flex;
+    flex-direction: row;  
+}
+.item-button {
+    width: 50%;
+    border-radius: 10px;
+    height: 100%;
+}
+.item-button:focus {
+    background-color: #b7e7b8;
+    outline: none;
+}
+.item-button:hover{
+    background-color: rgb(60, 162, 187);
+}
+.input__group--items-llamada__oculto {
+    display: none;
+}
+
+#resultado{
+    margin-top: 150px;
 }

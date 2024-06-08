@@ -76,6 +76,15 @@ document.getElementById('tiposervicio').addEventListener('change', function() {
     }
 });
 
+document.getElementById('horario_b2b').addEventListener('change', function() {
+    const b2bDetails = document.getElementById('b2b-details');
+    if (this.value === 'SI') {
+        b2bDetails.classList.remove('input__group--items-llamada__oculto');
+    } else {
+        b2bDetails.classList.add('input__group--items-llamada__oculto');
+    }
+});
+
 document.getElementById('copiar').addEventListener('click', function() {
     const idLlamada = document.getElementById('id-llamada').value;
     const smnet = document.getElementById('smnet').value;
@@ -83,14 +92,52 @@ document.getElementById('copiar').addEventListener('click', function() {
     const tecnologia = document.getElementById('tecnologia').value;
     const tiposervicio = document.getElementById('tiposervicio').value;
     const naturaleza = document.getElementById('naturaleza').value;
+    const horarioB2B = document.getElementById('horario_b2b').value;
+    const documento = document.getElementById('document').value;
 
-    const texto = `ID: ${idLlamada}\nSMNET: ${smnet}\nOBSERVACIONES: ${observaciones}\nTECNOLOGIA: ${tecnologia}\nTIPOSERVICIO: ${tiposervicio}\nNATURALEZA: ${naturaleza}`;
+    let b2bDetails = '';
+    if (horarioB2B === 'SI') {
+        const nombreAti = document.getElementById('nombre_atiende').value;
+        const celularAti = document.getElementById('celular_atiende').value;
+        const diasAti = document.getElementById('dias_atiende').value;
+        b2bDetails = `\nNombre de quien atiende: ${nombreAti}\nCelular de quien atiende: ${celularAti}\nDías en los que atiende: ${diasAti}`;
+    }
+
+    const texto = `Observaciones: Se ha puesto en contacto para informar que: ${observaciones}\nID de la llamada: ${idLlamada}\nSMNET: ${smnet}\nTecnología: ${tecnologia}\nServicio: ${tiposervicio}\nNaturaleza: ${naturaleza}\n¿Aplica horario B2B?: ${horarioB2B}${b2bDetails}`;
+
+    // Guardar en localStorage
+    localStorage.setItem(documento, texto);
 
     navigator.clipboard.writeText(texto).then(function() {
-        alert('Texto copiado al portapapeles');
+
     }).catch(function(err) {
         console.error('Error al copiar el texto: ', err);
     });
 
     document.getElementById('resultado').textContent = texto;
 });
+
+// Función para consultar información por número de documento
+function consultarPorDocumento(documento) {
+    const informacion = localStorage.getItem(documento);
+    if (informacion) {
+        console.log(`Información para el documento ${documento}: ${informacion}`);
+    } else {
+        console.log(`No se encontró información para el documento ${documento}`);
+    }
+}
+
+// Función para reiniciar el formulario y limpiar localStorage
+function reiniciarFormulario() {
+    document.querySelectorAll('.item-input').forEach(input => input.value = '');
+    document.getElementById('tecnologia').selectedIndex = 0;
+    document.getElementById('tiposervicio').innerHTML = '<option value="">Tipo Servicio</option>';
+    document.getElementById('naturaleza').innerHTML = '<option value="">Naturaleza</option>';
+    document.getElementById('horario_b2b').selectedIndex = 0;
+    document.getElementById('b2b-details').classList.add('input__group--items-llamada__oculto');
+    document.getElementById('resultado').textContent = '';
+    localStorage.clear();
+}
+
+// Agregar el event listener al botón de reinicio
+document.getElementById('reiniciar').addEventListener('click', reiniciarFormulario);

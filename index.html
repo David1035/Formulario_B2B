@@ -13,19 +13,19 @@
                 <label for="id-llamada">ID</label>
                 <input type="text" id="id-llamada" class="item-input">
             </div>
-            <div class="input__group--items">
+            <div class="input__group--items input__group--items-name">
                 <label for="nombre-client">NOMBRE</label>
                 <input type="text" id="nombre-client" class="item-input">
             </div>
-            <div class="input__group--items">
+            <div class="input__group--items input__group--items-documen">
                 <label for="document">DOCUMENTO</label>
                 <input type="number" id="document" class="item-input">
             </div>
-            <div class="input__group--items">
+            <div class="input__group--items input__group--items-smnet">
                 <label for="smnet">SMNET</label>
                 <input type="number" id="smnet" class="item-input">
             </div>
-            <div class="input__group--items">
+            <div class="input__group--items input__group--items-tipiweb">
                 <label for="tipiWeb">TIPIWEB</label>
                 <select name="tipificó?" id="tipiWeb">
                     <option value="">¿Tipificó?</option>
@@ -35,7 +35,7 @@
             </div>
             <div class="input__group--items input__group--items-llamada">
                 <label for="observaciones">OBSERVACIONES</label>
-                <input type="text" id="observaciones">
+                <input type="text" id="observaciones" class="item-input">
             </div>
             <div class="input-group">
                 <label for="tecnologia">TECNOLOGIA</label>
@@ -58,16 +58,39 @@
                     <option value="">Naturaleza</option>
                 </select>
             </div>
-            <div class="input__group--items input__group--items-llamada">
-                <button id="copiar">Copiar</button>
+            <div class="input__group--items input__group--items-button">
+                <button id="copiar" class="item-button">Copiar</button>
+                <button id="reiniciar" class="item-button">reiniciar</button>
             </div>
-            <div class="input__group--items input__group--items-llamada">
+            <div class="input__group--items">
                 <label for="celular">CELULAR</label>
                 <input type="text" id="celular" class="item-input">
             </div>
+            <div class="input__group--items">
+                <label for="horario_b2b">¿Aplica horario B2B?</label>
+                <select id="horario_b2b">
+                    <option value="">¿Aplica horario B2B?</option>
+                    <option value="NO">NO</option>
+                    <option value="SI">SI</option>
+                </select>
+            </div>
+            <div class="input__group--items input__group--items-llamada__oculto" id="b2b-details">
+                <label for="nombre_atiende">Nombre de quien atiende</label>
+                <input type="text" id="nombre_atiende" class="item-input">
+                <label for="celular_atiende">Celular de quien atiende</label>
+                <input type="text" id="celular_atiende" class="item-input">
+                <label for="dias_atiende">Días en los que atiende</label>
+                <select id="dias_atiende">
+                    <option value="Lunes a Viernes">Lunes a Viernes</option>
+                    <option value="Lunes a sábado">Lunes a sábado</option>
+                    <option value="Lunes a Domingo">Lunes a Domingo</option>
+                </select>
+                <label for="horario_atiende">Horario de atención</label>
+                <input type="text" id="horario_atiende" class="item-input">
+            </div>
         </div>
+        <p id="resultado"></p>
     </div>
-    <p id="resultado"></p>
-    <script src="js/formulario.js"></script>
+    <script src="formulario.js"></script>
 </body>
 </html>
