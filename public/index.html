@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Formulario B2B</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -13,19 +13,19 @@
                 <label for="id-llamada">ID</label>
                 <input type="text" id="id-llamada" class="item-input">
             </div>
-            <div class="input__group--items input__group--items-name">
+            <div class="input__group--items">
                 <label for="nombre-client">NOMBRE</label>
                 <input type="text" id="nombre-client" class="item-input">
             </div>
-            <div class="input__group--items input__group--items-documen">
+            <div class="input__group--items">
                 <label for="document">DOCUMENTO</label>
                 <input type="number" id="document" class="item-input">
             </div>
-            <div class="input__group--items input__group--items-smnet">
+            <div class="input__group--items">
                 <label for="smnet">SMNET</label>
                 <input type="number" id="smnet" class="item-input">
             </div>
-            <div class="input__group--items input__group--items-tipiweb">
+            <div class="input__group--items">
                 <label for="tipiWeb">TIPIWEB</label>
                 <select name="tipificó?" id="tipiWeb">
                     <option value="">¿Tipificó?</option>
@@ -58,15 +58,14 @@
                     <option value="">Naturaleza</option>
                 </select>
             </div>
-            <div class="input__group--items input__group--items-button">
-                <button id="copiar" class="item-button">Copiar</button>
-                <button id="reiniciar" class="item-button">reiniciar</button>
+            <div class="input__group--items input__group--items-llamada">
+                <button id="copiar">Copiar</button>
             </div>
-            <div class="input__group--items">
+            <div class="input__group--items input__group--items-llamada">
                 <label for="celular">CELULAR</label>
                 <input type="text" id="celular" class="item-input">
             </div>
-            <div class="input__group--items">
+            <div class="input__group--items input__group--items-llamada">
                 <label for="horario_b2b">¿Aplica horario B2B?</label>
                 <select id="horario_b2b">
                     <option value="">¿Aplica horario B2B?</option>
@@ -85,12 +84,12 @@
                     <option value="Lunes a sábado">Lunes a sábado</option>
                     <option value="Lunes a Domingo">Lunes a Domingo</option>
                 </select>
-                <label for="horario_atiende">Horario de atención</label>
-                <input type="text" id="horario_atiende" class="item-input">
             </div>
         </div>
         <p id="resultado"></p>
     </div>
-    <script src="formulario.js"></script>
+    <script src="/public/formulario.js"></script>
 </body>
 </html>
+
+

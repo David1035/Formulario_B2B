@@ -12,8 +12,38 @@ const opcionesNaturaleza = {
     'One_TV_2.0': ['Sin señal', 'DRM falló', 'Imagen congelada / TV pixelada', 'Problemas de audio', 'Error de descarga', 'Problemas en comando de voz', 'Configuración de control', 'Problemas app One TV', 'Servicio intermitente']
 };
 
+// Evento para cambiar tiposervicio basado en la tecnología seleccionada
 document.getElementById('tecnologia').addEventListener('change', function() {
-    const tecnologia = this.value;
+    actualizarTiposervicio();
+});
+
+// Evento para cambiar naturaleza basada en el tiposervicio seleccionado
+document.getElementById('tiposervicio').addEventListener('change', function() {
+    actualizarNaturaleza();
+});
+
+// Evento para mostrar/ocultar detalles de B2B
+document.getElementById('horario_b2b').addEventListener('change', function() {
+    toggleB2BDetails();
+});
+
+// Función para copiar la información y guardarla en localStorage
+document.getElementById('copiar').addEventListener('click', function() {
+    copiarInformacion();
+});
+
+// Función para reiniciar el formulario
+document.getElementById('reiniciar').addEventListener('click', function() {
+    reiniciarFormulario();
+});
+
+// Enfocar en el campo id-llamada al cargar la página
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('id-llamada').focus();
+});
+
+function actualizarTiposervicio() {
+    const tecnologia = document.getElementById('tecnologia').value;
     const tiposervicio = document.getElementById('tiposervicio');
     const naturaleza = document.getElementById('naturaleza');
 
@@ -54,10 +84,10 @@ document.getElementById('tecnologia').addEventListener('change', function() {
         optionNaturaleza.textContent = 'Seleccione la naturaleza del problema';
         naturaleza.appendChild(optionNaturaleza);
     }
-});
+}
 
-document.getElementById('tiposervicio').addEventListener('change', function() {
-    const tiposervicio = this.value;
+function actualizarNaturaleza() {
+    const tiposervicio = document.getElementById('tiposervicio').value;
     const naturaleza = document.getElementById('naturaleza');
     naturaleza.innerHTML = ''; // Limpiar opciones anteriores
 
@@ -74,18 +104,18 @@ document.getElementById('tiposervicio').addEventListener('change', function() {
         option.textContent = 'Seleccione la naturaleza del problema';
         naturaleza.appendChild(option);
     }
-});
+}
 
-document.getElementById('horario_b2b').addEventListener('change', function() {
+function toggleB2BDetails() {
     const b2bDetails = document.getElementById('b2b-details');
     if (this.value === 'SI') {
         b2bDetails.classList.remove('input__group--items-llamada__oculto');
     } else {
         b2bDetails.classList.add('input__group--items-llamada__oculto');
     }
-});
+}
 
-document.getElementById('copiar').addEventListener('click', function() {
+function copiarInformacion() {
     const idLlamada = document.getElementById('id-llamada').value;
     const smnet = document.getElementById('smnet').value;
     const observaciones = document.getElementById('observaciones').value;
@@ -109,25 +139,14 @@ document.getElementById('copiar').addEventListener('click', function() {
     localStorage.setItem(documento, texto);
 
     navigator.clipboard.writeText(texto).then(function() {
-
+        alert('Texto copiado al portapapeles');
     }).catch(function(err) {
         console.error('Error al copiar el texto: ', err);
     });
 
     document.getElementById('resultado').textContent = texto;
-});
-
-// Función para consultar información por número de documento
-function consultarPorDocumento(documento) {
-    const informacion = localStorage.getItem(documento);
-    if (informacion) {
-        console.log(`Información para el documento ${documento}: ${informacion}`);
-    } else {
-        console.log(`No se encontró información para el documento ${documento}`);
-    }
 }
 
-// Función para reiniciar el formulario y limpiar localStorage
 function reiniciarFormulario() {
     document.querySelectorAll('.item-input').forEach(input => input.value = '');
     document.getElementById('tecnologia').selectedIndex = 0;
@@ -137,14 +156,7 @@ function reiniciarFormulario() {
     document.getElementById('horario_b2b').selectedIndex = 0;
     document.getElementById('b2b-details').classList.add('input__group--items-llamada__oculto');
     document.getElementById('resultado').textContent = '';
-    localStorage.clear();
 
     // Enfocar en el campo id-llamada
     document.getElementById('id-llamada').focus(); 
 }
-
-// Agregar el event listener al botón de reinicio
-document.getElementById('reiniciar').addEventListener('click', reiniciarFormulario);
-
-document.getElementById('id-llamada').focus();
-
