@@ -1,5 +1,6 @@
 let totalMinutos = 0;
 let cantidadIteraciones = 0;
+const textosPorDocumento = {};
 
 document.getElementById('minutos').addEventListener('keydown', function(event) {
     if (event.key === 'Tab' || event.key === 'Enter') {
@@ -10,16 +11,11 @@ document.getElementById('minutos').addEventListener('keydown', function(event) {
             cantidadIteraciones += 1;
             this.value = '';
             actualizarPromedio();
+            document.getElementById('id-llamada').focus();
         }
     }
 });
 
-document.getElementById('reiniciar').addEventListener('click', function() {
-    totalMinutos = 0;
-    cantidadIteraciones = 0;
-    document.getElementById('minutos').value = '';
-    actualizarPromedio();
-});
 
 function actualizarPromedio() {
     const promedio = cantidadIteraciones === 0 ? 0 : (totalMinutos / cantidadIteraciones).toFixed(2);
@@ -130,13 +126,13 @@ document.getElementById('copiar').addEventListener('click', function() {
         const nombreAti = document.getElementById('nombre_atiende').value;
         const celularAti = document.getElementById('celular_atiende').value;
         const diasAti = document.getElementById('dias_atiende').value;
-        b2bDetails = `Nombre de quien atiende: ${nombreAti}\nCelular de quien atiende: ${celularAti}\nDías en los que atiende: ${diasAti}`;
+        b2bDetails = `\nNombre de quien atiende: ${nombreAti}\nCelular de quien atiende: ${celularAti}\nDías en los que atiende: ${diasAti}`;
     }
 
     const texto = `Observaciones: Se ha puesto en contacto para informar que: ${observaciones}ID de la llamada: ${idLlamada}SMNET: ${smnet}Tecnología: ${tecnologia}Servicio: ${tiposervicio}\nNaturaleza: ${naturaleza}¿Aplica horario B2B?: ${horarioB2B}${b2bDetails}`;
 
-    // Guardar en localStorage
-    localStorage.setItem(documento, texto);
+    // Almacenar texto en el objeto con el documento como clave
+    textosPorDocumento[documento] = texto;
 
     navigator.clipboard.writeText(texto).then(function() {
 
@@ -170,7 +166,7 @@ function reiniciarFormulario() {
     localStorage.clear();
 
     // Enfocar en el campo id-llamada
-    document.getElementById('id-llamada').focus(); 
+    document.getElementById('minutos').focus(); 
 }
 
 // Agregar el event listener al botón de reinicio
@@ -178,3 +174,8 @@ document.getElementById('reiniciar').addEventListener('click', reiniciarFormular
 
 document.getElementById('id-llamada').focus();
 
+document.getElementById('consultar').addEventListener('click', function() {
+    const documento = document.getElementById('documento_a_consultar').value;
+    const texto = textosPorDocumento[documento] || 'No se encontró información para este documento.';
+    document.getElementById('texto_por_documento').textContent = texto;
+});
