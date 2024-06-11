@@ -63,6 +63,10 @@
                 <button id="reiniciar" class="item-button">reiniciar</button>
             </div>
             <div class="input__group--items">
+                <label for="minutos">Minutos:</label>
+                <input type="number" id="minutos" class="item-input" min="0">
+            </div>
+            <div class="input__group--items">
                 <label for="celular">CELULAR</label>
                 <input type="text" id="celular" class="item-input">
             </div>
@@ -88,8 +92,10 @@
                 <label for="horario_atiende">Horario de atención</label>
                 <input type="text" id="horario_atiende" class="item-input">
             </div>
+            
         </div>
         <p id="resultado"></p>
+        <p id="resultado-conteo"></p>
     </div>
     <script src="formulario.js"></script>
 </body>

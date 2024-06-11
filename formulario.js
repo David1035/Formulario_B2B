@@ -1,3 +1,33 @@
+let totalMinutos = 0;
+let cantidadIteraciones = 0;
+
+document.getElementById('minutos').addEventListener('keydown', function(event) {
+    if (event.key === 'Tab' || event.key === 'Enter') {
+        event.preventDefault();
+        const minutos = parseFloat(this.value);
+        if (!isNaN(minutos)) {
+            totalMinutos += minutos;
+            cantidadIteraciones += 1;
+            this.value = '';
+            actualizarPromedio();
+        }
+    }
+});
+
+document.getElementById('reiniciar').addEventListener('click', function() {
+    totalMinutos = 0;
+    cantidadIteraciones = 0;
+    document.getElementById('minutos').value = '';
+    actualizarPromedio();
+});
+
+function actualizarPromedio() {
+    const promedio = cantidadIteraciones === 0 ? 0 : (totalMinutos / cantidadIteraciones).toFixed(2);
+    document.getElementById('resultado-conteo').textContent = `Promedio: ${promedio}`;
+    document.getElementById('minutos').focus();
+}
+
+
 const opcionesTiposervicio = {
     'HFC': ['Internet', 'Telefonía', 'TV_Digital', 'One_TV_2.0'],
     'GPON': ['Internet', 'IPTV', 'Telefonía', 'One_TV_2.0'],
@@ -100,10 +130,10 @@ document.getElementById('copiar').addEventListener('click', function() {
         const nombreAti = document.getElementById('nombre_atiende').value;
         const celularAti = document.getElementById('celular_atiende').value;
         const diasAti = document.getElementById('dias_atiende').value;
-        b2bDetails = `\nNombre de quien atiende: ${nombreAti}\nCelular de quien atiende: ${celularAti}\nDías en los que atiende: ${diasAti}`;
+        b2bDetails = `Nombre de quien atiende: ${nombreAti}\nCelular de quien atiende: ${celularAti}\nDías en los que atiende: ${diasAti}`;
     }
 
-    const texto = `Observaciones: Se ha puesto en contacto para informar que: ${observaciones}\nID de la llamada: ${idLlamada}\nSMNET: ${smnet}\nTecnología: ${tecnologia}\nServicio: ${tiposervicio}\nNaturaleza: ${naturaleza}\n¿Aplica horario B2B?: ${horarioB2B}${b2bDetails}`;
+    const texto = `Observaciones: Se ha puesto en contacto para informar que: ${observaciones}ID de la llamada: ${idLlamada}SMNET: ${smnet}Tecnología: ${tecnologia}Servicio: ${tiposervicio}\nNaturaleza: ${naturaleza}¿Aplica horario B2B?: ${horarioB2B}${b2bDetails}`;
 
     // Guardar en localStorage
     localStorage.setItem(documento, texto);
