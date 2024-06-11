@@ -1,6 +1,6 @@
 let totalMinutos = 0;
 let cantidadIteraciones = 0;
-const textosPorDocumento = {};
+const textosPorDocumento = [];
 
 document.getElementById('minutos').addEventListener('keydown', function(event) {
     if (event.key === 'Tab' || event.key === 'Enter') {
@@ -126,10 +126,10 @@ document.getElementById('copiar').addEventListener('click', function() {
         const nombreAti = document.getElementById('nombre_atiende').value;
         const celularAti = document.getElementById('celular_atiende').value;
         const diasAti = document.getElementById('dias_atiende').value;
-        b2bDetails = `\nNombre de quien atiende: ${nombreAti}\nCelular de quien atiende: ${celularAti}\nDías en los que atiende: ${diasAti}`;
+        b2bDetails = `\nNombre de quien atiende: ${nombreAti},Celular de quien atiende: ${celularAti}, Días en los que atiende: ${diasAti}`;
     }
 
-    const texto = `Observaciones: Se ha puesto en contacto para informar que ${observaciones}ID de la llamada: ${idLlamada}SMNET: ${smnet}Tecnología: ${tecnologia}Servicio: ${tiposervicio}\nNaturaleza: ${naturaleza}¿Aplica horario B2B?: ${horarioB2B}${b2bDetails}`;
+    const texto = `Observaciones: Se ha puesto en contacto para informar que ${observaciones}. ID de la llamada: ${idLlamada}, SMNET: ${smnet}, Tecnología: ${tecnologia}, Servicio: ${tiposervicio}, Naturaleza: ${naturaleza}, ¿Aplica horario B2B?: ${horarioB2B}${b2bDetails}`;
 
     // Almacenar texto en el objeto con el documento como clave
     textosPorDocumento[documento] = texto;
@@ -144,15 +144,6 @@ document.getElementById('copiar').addEventListener('click', function() {
     document.getElementById('resultado').textContent = texto;
 });
 
-// Función para consultar información por número de documento
-function consultarPorDocumento(documento) {
-    const informacion = localStorage.getItem(documento);
-    if (informacion) {
-        console.log(`Información para el documento ${documento}: ${informacion}`);
-    } else {
-        console.log(`No se encontró información para el documento ${documento}`);
-    }
-}
 
 // Función para reiniciar el formulario y limpiar localStorage
 function reiniciarFormulario() {
@@ -174,9 +165,3 @@ function reiniciarFormulario() {
 document.getElementById('reiniciar').addEventListener('click', reiniciarFormulario);
 
 document.getElementById('id-llamada').focus();
-
-document.getElementById('consultar').addEventListener('click', function() {
-    const documento = document.getElementById('documento_a_consultar').value;
-    const texto = textosPorDocumento[documento] || 'No se encontró información para este documento.';
-    document.getElementById('texto_por_documento').textContent = texto;
-});
