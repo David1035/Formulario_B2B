@@ -129,10 +129,11 @@ document.getElementById('copiar').addEventListener('click', function() {
         b2bDetails = `\nNombre de quien atiende: ${nombreAti}\nCelular de quien atiende: ${celularAti}\nDías en los que atiende: ${diasAti}`;
     }
 
-    const texto = `Observaciones: Se ha puesto en contacto para informar que: ${observaciones}ID de la llamada: ${idLlamada}SMNET: ${smnet}Tecnología: ${tecnologia}Servicio: ${tiposervicio}\nNaturaleza: ${naturaleza}¿Aplica horario B2B?: ${horarioB2B}${b2bDetails}`;
+    const texto = `Observaciones: Se ha puesto en contacto para informar que ${observaciones}ID de la llamada: ${idLlamada}SMNET: ${smnet}Tecnología: ${tecnologia}Servicio: ${tiposervicio}\nNaturaleza: ${naturaleza}¿Aplica horario B2B?: ${horarioB2B}${b2bDetails}`;
 
     // Almacenar texto en el objeto con el documento como clave
     textosPorDocumento[documento] = texto;
+    localStorage.setItem(documento, texto);
 
     navigator.clipboard.writeText(texto).then(function() {
 
