@@ -112,16 +112,16 @@ function copiarDatosFormulario() {
     const horarioB2B = document.getElementById('horario_b2b').value;
     const documento = document.getElementById('document').value;
 
-    let b2bDetails = 'NO';
+    let b2bDetails = '';
     if (horarioB2B === 'SI') {
         const nombreAti = document.getElementById('nombre_atiende').value;
         const celularAti = document.getElementById('celular_atiende').value;
         const diasAti = document.getElementById('dias_atiende').value;
         const horarioAtiende = document.getElementById('horario_atiende').value;
-        b2bDetails = `Nombre de quien atiende: ${nombreAti} Celular de quien atiende: ${celularAti}, Días en los que atiende: ${diasAti}, Horario en que atiende: ${horarioAtiende}`;
+        b2bDetails = `Nombre de quien atiende: ${nombreAti}, Celular de quien atiende: ${celularAti}, Días en los que atiende: ${diasAti}, Horario en que atiende: ${horarioAtiende}`;
     }
 
-    const texto = `Observaciones: Se ha puesto en contacto para informar que ${observaciones}. ID de la llamada: ${idLlamada}, SMNET: ${smnet}, Tecnología: ${tecnologia}, Servicio: ${tiposervicio}, Naturaleza: ${naturaleza}, ¿Aplica horario B2B?: ${horarioB2B} ${b2bDetails}`;
+    const texto = `Observaciones: Se ha puesto en contacto para informar que ${observaciones}. ID de la llamada: ${idLlamada}, SMNET: ${smnet}, Tecnología: ${tecnologia}, Servicio: ${tiposervicio}, Naturaleza: ${naturaleza}, ¿Aplica horario B2B?: ${horarioB2B}, ${b2bDetails}`;
 
     // Almacenar texto en el objeto con el documento como clave
 
@@ -138,7 +138,7 @@ function copiarDatosFormulario() {
 function reiniciarFormulario() {
     const idLlamada = document.getElementById('id-llamada').value;
     if (!idLlamada || !startTime) {
-        document.getElementById('id-llamada').focus();
+        alert("Debe ingresar datos en ID llamada y activar con Tabulador o Enter antes de reiniciar.");
         return;
     }
 
@@ -148,18 +148,12 @@ function reiniciarFormulario() {
     const endTime = new Date();
     const elapsedSeconds = (endTime - startTime) / 1000;
 
-    totalSegundos += elapsedSeconds + 7; // Sumar 10 segundos adicionales
+    totalSegundos += elapsedSeconds;
     cantidadIteraciones++;
 
     const totalMinutos = (totalSegundos / 60).toFixed(2);
     const promedio = (totalSegundos / cantidadIteraciones / 60).toFixed(2); // Convertir a minutos
-    document.getElementById('resultado-conteo').textContent = `Promedio: ${promedio}, Cantidad: ${cantidadIteraciones}, Total_Tiempo ${totalMinutos}`;
-
-    // Obtener fecha actual
-    const fechaActual = new Date().toLocaleDateString('es-CO');
-    // Obtener hora inicial y final formateadas
-    const horaInicial = startTime.toLocaleTimeString('es-CO');
-    const horaFinal = endTime.toLocaleTimeString('es-CO');
+    document.getElementById('resultado-conteo').textContent = `Promedio: ${promedio} minutos, Total: ${totalMinutos} minutos`;
 
     const nombreCliente = document.getElementById('nombre-client').value;
     const documento = document.getElementById('document').value;
@@ -172,16 +166,16 @@ function reiniciarFormulario() {
     const horarioB2B = document.getElementById('horario_b2b').value;
     const celular = document.getElementById('celular').value;   
 
-    let b2bDetails = 'NO';
+    let b2bDetails = '';
     if (horarioB2B === 'SI') {
         const nombreAti = document.getElementById('nombre_atiende').value;
         const celularAti = document.getElementById('celular_atiende').value;
         const diasAti = document.getElementById('dias_atiende').value;
-        b2bDetails = `Nombre de quien atiende: ${nombreAti} Celular de quien atiende: ${celularAti}, Días en los que atiende: ${diasAti}`;
+        b2bDetails = `Nombre de quien atiende: ${nombreAti}, Celular de quien atiende: ${celularAti}, Días en los que atiende: ${diasAti}`;
     }
 
 
-    const texto1 = `Fecha: ${fechaActual}, Hora inicial: ${horaInicial}, Hora final: ${horaFinal}, Observaciones: Se ha puesto en contacto para informar que ${observaciones}, ID de la llamada: ${idLlamada}, Nombre: ${nombreCliente}, Documento: ${documento}, SMNET: ${smnet}, TIPIWEB: ${tipiWeb}, Tecnología: ${tecnologia}, Servicio: ${tiposervicio}, Naturaleza: ${naturaleza}, Celular: ${celular}, ¿Aplica horario B2B?: ${horarioB2B} ${b2bDetails}`;
+    const texto1 = `Observaciones: Se ha puesto en contacto para informar que: ${observaciones}, ID de la llamada: ${idLlamada}, Nombre: ${nombreCliente}, Documento: ${documento}, SMNET: ${smnet}, TIPIWEB: ${tipiWeb}, Tecnología: ${tecnologia}, Servicio: ${tiposervicio}, Naturaleza: ${naturaleza}, Celular: ${celular}, ¿Aplica horario B2B?: ${horarioB2B}, ${b2bDetails}`;
 
     // Copiar texto al portapapeles y almacenarlo en localStorage
     navigator.clipboard.writeText(texto1).then(function() {
