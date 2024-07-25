@@ -183,16 +183,21 @@ function reiniciarFormulario() {
 
     const texto1 = `Fecha: ${fechaActual}, Hora inicial: ${horaInicial}, Hora final: ${horaFinal}, Observaciones: Se ha puesto en contacto para informar que ${observaciones}, ID de la llamada: ${idLlamada}, Nombre: ${nombreCliente}, Documento: ${documento}, SMNET: ${smnet}, TIPIWEB: ${tipiWeb}, Tecnología: ${tecnologia}, Servicio: ${tiposervicio}, Naturaleza: ${naturaleza}, Celular: ${celular}, ¿Aplica horario B2B?: ${horarioB2B} ${b2bDetails}, AHT: ${promedio}, Cantidad: ${cantidadIteraciones}, totalTiempo: ${totalMinutos}`;
 
-    // Copiar texto al portapapeles y almacenarlo en localStorage
-    navigator.clipboard.writeText(texto1).then(function() {
-        // Éxito al copiar
-    }).catch(function(err) {
-        console.error('Error al copiar el texto: ', err);
+        // Enviar datos al servidor
+    fetch('/save-text', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ texto1 }),
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data); // Confirmación en consola
+    })
+    .catch((error) => {
+        console.error('Error:', error);
     });
-
-    // Almacenar texto en el objeto con el documento como clave
-    textosPorDocumento[documento] = texto1;
-    localStorage.setItem(documento, texto1);
 
     // Limpiar el formulario
     document.querySelectorAll('.item-input').forEach(input => input.value = '');
