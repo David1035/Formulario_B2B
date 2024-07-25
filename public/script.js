@@ -3,6 +3,7 @@ let cantidadIteraciones = 0;
 let startTime;
 const textosPorDocumento = {};
 
+
 // Iniciar contador de tiempo cuando se presiona Tabulador o Enter en id-llamada
 document.getElementById('id-llamada').addEventListener('keydown', function(event) {
     if (event.key === 'Tab' || event.key === 'Enter') {
@@ -143,7 +144,7 @@ function reiniciarFormulario() {
     }
 
     // Copiar datos antes de reiniciar
-    copiarDatosFormulario();
+    //copiarDatosFormulario();
 
     const endTime = new Date();
     const elapsedSeconds = (endTime - startTime) / 1000;
