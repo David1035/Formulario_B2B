@@ -223,9 +223,3 @@ document.getElementById('reiniciar').addEventListener('click', reiniciarFormular
 
 // Enfocar en el campo id-llamada al cargar la página
 document.getElementById('id-llamada').focus();
-
-document.getElementById('consultar').addEventListener('click', function() {
-    const documento = document.getElementById('documento_a_consultar').value;
-    const texto = localStorage.getItem(documento) || 'No se encontró información para este documento.';
-    document.getElementById('texto_por_documento').textContent = texto;
-});
