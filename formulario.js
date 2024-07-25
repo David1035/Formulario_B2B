@@ -148,12 +148,12 @@ function reiniciarFormulario() {
     const endTime = new Date();
     const elapsedSeconds = (endTime - startTime) / 1000;
 
-    totalSegundos += elapsedSeconds + 7; // Sumar 10 segundos adicionales
+    totalSegundos += elapsedSeconds + 10; // Sumar 10 segundos adicionales
     cantidadIteraciones++;
 
     const totalMinutos = (totalSegundos / 60).toFixed(2);
     const promedio = (totalSegundos / cantidadIteraciones / 60).toFixed(2); // Convertir a minutos
-    document.getElementById('resultado-conteo').textContent = `Promedio: ${promedio}, Cantidad: ${cantidadIteraciones}, Total_Tiempo ${totalMinutos}`;
+    document.getElementById('resultado-conteo').textContent = `AHT: ${promedio}, Cantidad: ${cantidadIteraciones}, Total_Tiempo ${totalMinutos}`;
 
     // Obtener fecha actual
     const fechaActual = new Date().toLocaleDateString('es-CO');
@@ -181,7 +181,7 @@ function reiniciarFormulario() {
     }
 
 
-    const texto1 = `Fecha: ${fechaActual}, Hora inicial: ${horaInicial}, Hora final: ${horaFinal}, Observaciones: Se ha puesto en contacto para informar que ${observaciones}, ID de la llamada: ${idLlamada}, Nombre: ${nombreCliente}, Documento: ${documento}, SMNET: ${smnet}, TIPIWEB: ${tipiWeb}, Tecnología: ${tecnologia}, Servicio: ${tiposervicio}, Naturaleza: ${naturaleza}, Celular: ${celular}, ¿Aplica horario B2B?: ${horarioB2B} ${b2bDetails}`;
+    const texto1 = `Fecha: ${fechaActual}, Hora inicial: ${horaInicial}, Hora final: ${horaFinal}, Observaciones: Se ha puesto en contacto para informar que ${observaciones}, ID de la llamada: ${idLlamada}, Nombre: ${nombreCliente}, Documento: ${documento}, SMNET: ${smnet}, TIPIWEB: ${tipiWeb}, Tecnología: ${tecnologia}, Servicio: ${tiposervicio}, Naturaleza: ${naturaleza}, Celular: ${celular}, ¿Aplica horario B2B?: ${horarioB2B} ${b2bDetails}, AHT: ${promedio}, Cantidad: ${cantidadIteraciones}, totalTiempo: ${totalMinutos}`;
 
     // Copiar texto al portapapeles y almacenarlo en localStorage
     navigator.clipboard.writeText(texto1).then(function() {

@@ -3,7 +3,11 @@
     margin: 0;
     padding: 0;
 }
-
+.header-container{
+    text-align: center;
+    padding: 20px;
+    color: rgb(13, 13, 172);
+}
 .formulario__capturar__datos {
     max-width:700px;
     margin: 0 auto;
