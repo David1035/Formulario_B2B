@@ -1,5 +1,5 @@
-let totalSegundos = 0;
-let cantidadIteraciones = 0;
+let totalSegundos = (219.80 * 60);
+let cantidadIteraciones = 17;
 let startTime;
 const textosPorDocumento = {};
 
