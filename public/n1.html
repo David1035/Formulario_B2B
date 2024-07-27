@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N1</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <header class="header-container">
-        <h1>ESPACIO DE TRABAJO N1</h1>
-    </header>
     <div class="formulario__capturar__datos">
         <div class="main__container">
+            <button id="inicia-contador" class="input__group--items input__group--items-llamada">Entrante</button>
             <div class="input__group--items input__group--items-llamada">
                 <label for="id-llamada">ID</label>
                 <input type="text" id="id-llamada" class="item-input">
@@ -40,7 +42,7 @@
                 <label for="observaciones">OBSERVACIONES</label>
                 <input type="text" id="observaciones" class="item-input">
             </div>
-            <div class="input-group">
+            <div class="input__group--items ">
                 <label for="tecnologia">TECNOLOGIA</label>
                 <select id="tecnologia">
                     <option value="">Tecnología</option>
@@ -49,13 +51,13 @@
                     <option value="ADSL">ADSL</option>
                 </select>
             </div>
-            <div class="input-group">
+            <div class="input__group--items">
                 <label for="tiposervicio">TIPOSERVICIO</label>
                 <select id="tiposervicio">
                     <option value="">Tipo Servicio</option>
                 </select>
             </div>
-            <div class="input-group">
+            <div class="input__group--items ">
                 <label for="naturaleza">NATURALEZA</label>
                 <select id="naturaleza">
                     <option value="">Naturaleza</option>
@@ -73,6 +75,7 @@
                 <label for="horario_b2b">¿Aplica horario B2B?</label>
                 <select id="horario_b2b">
                     <option value="">¿Aplica horario B2B?</option>
+                    <option value="NO">NO</option>
                     <option value="SI">SI</option>
                 </select>
             </div>
@@ -90,12 +93,9 @@
                 <label for="horario_atiende">Horario de atención</label>
                 <input type="text" id="horario_atiende" class="item-input">
             </div>
-            
         </div>
         <p id="resultado"></p>
-        <p id="resultado-conteo"></p>
-        <p id="textosPorDocuento"></p>
     </div>
-    <script src="script.js"></script>
+    <script src="formulario.js"></script>
 </body>
 </html>
