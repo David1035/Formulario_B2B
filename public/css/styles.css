@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.formulario__capturar__datos {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main__container {
+  width: auto;
+  max-width: 900px;
+  background-color: aliceblue;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.input__group--items {
+  display: flex;
+  flex-direction: column;
+  max-width: 100px;
+  border: solid 1px;
+  background-color: aqua;
+}
+.input__group--items label {
+  font-weight: 400;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.input__group--button-llamada {
+  width: 80px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 17px;
+  border: solid 2px;
+}
+
+/*# sourceMappingURL=styles.css.map */

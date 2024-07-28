@@ -4,7 +4,7 @@
   "description": "",
   "main": "pruebas.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sass": "sass --watch public/scss:public/css"
   },
   "keywords": [],
   "author": "",
@@ -13,4 +13,5 @@
     "body-parser": "^1.20.2",
     "express": "^4.19.2"
   }
+  
 }
