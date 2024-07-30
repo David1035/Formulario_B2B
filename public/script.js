@@ -6,3 +6,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
         this.style.height = this.scrollHeight + 'px'; // Set the height based on the content
     });
 });
+
