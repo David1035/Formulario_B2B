@@ -1,9 +1,9 @@
-//Función para agregar eventos por teclado
-function addEventListeners(element, callback){
+// Función para agregar eventos por teclado
+function addEventListeners(element, callback, keys = ['Enter', 'Tab']) {
     element.addEventListener('click', callback);
     element.addEventListener('keydown', event => {
-        if(event.key === 'Tab' || event.key === 'Enter'){
-            event.preventDefault(); //previene comportamiento por defecto de enter
+        if (keys.includes(event.key)) {
+            event.preventDefault(); // previene comportamiento por defecto
             callback();
         }
     });
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
     addEventListeners(buttonContador, iniciarContador);
     addEventListeners(copiar, insertarTexto)
-    addEventListeners(reiniciar, reiniciarFormulario)
+    addEventListeners(reiniciar, reiniciarFormulario, ['Enter']);
     horarioB2B.addEventListener('change', toggleB2BDetails);
     
 });
@@ -65,6 +65,7 @@ function insertarTexto(){
 }
 
 function reiniciarFormulario (){
+    
     // Limpiar todos los campos del formulario
     document.getElementById('id-llamada').value = '';
     document.getElementById('nombre-client').value = '';
@@ -81,7 +82,6 @@ function reiniciarFormulario (){
 
     const buttonContador = document.getElementById('inicia-contador');
     buttonContador.focus();
-    celular.focus();
 
     horaFinal = new Date().getTime();
     // Bloquear el botón después de iniciar el contador
