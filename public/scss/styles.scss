@@ -16,11 +16,12 @@
     .main__container {
         width: auto;
         max-width: 400px;
-        background-color: #D0E6C3;
+        background-color: #18FFFF;
         display: flex;
         gap: 10px;
         flex-wrap: wrap;
         justify-content: center;
+        padding: 50px 10px;
 
         .input__group--items {
             display: flex;
@@ -33,7 +34,7 @@
             label {
               text-align: center;
               font-family: "Roboto", sans-serif;
-              color: rgb(21, 74, 219);
+              color: black;
               font-weight: bold;
               
             }
@@ -43,16 +44,16 @@
                 border: none;
                 height: 24px;
                 font-weight: bold;
-                color: rgb(163, 13, 233);
+                color: #2E4053;
                 &:hover,
                 &:focus,
                 &:active {
-                background-color: rgba(156, 82, 158, 0.411); // Color al pasar el mouse
+                background-color: #C8E6C9; // Color al pasar el mouse
                 }
             }
             select{
                 font-weight: bold;
-                color: rgb(163, 13, 233);
+                color: #0E6251;
             }
           }
           
@@ -65,7 +66,7 @@
             font-weight: bold;
             font-size: 17px;
             border: none;
-            color: rgb(21, 74, 219);
+            color: black;
             font-weight: bold;
             &:hover,
             &:focus,
@@ -88,11 +89,11 @@
                 overflow: hidden;
                 border-radius: 5px;
                 font-weight: bold;
-                color: rgb(163, 13, 233);
+                color: #212F3C;
                 &:hover,
                 &:focus,
                 &:active {
-                background-color: rgba(156, 82, 158, 0.411); // Color al pasar el mouse
+                background-color: #C8E6C9; // Color al pasar el mouse
                 }
             }
           }
@@ -102,12 +103,11 @@
             flex-direction: row;
             gap: 10px;
             justify-content: center;
-            background-color: #D0E6C3;
 
             .item-button{
                 border: none;
                 border-radius: 10px;
-                color: rgb(163, 13, 233);
+                color: #003300;
                 font-weight: bold;
                 &:hover,
                 &:focus,
@@ -121,12 +121,12 @@
           }
           .input__group--items-llamada__oculto{
             max-width: 100%;
-            display: flex;
+            display: none;
             gap: 10px;
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
-            background-color: #D0E6C3;
+            background-color: #FBE9E7;
         }
       }  
   }

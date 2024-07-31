@@ -81,6 +81,8 @@ function reiniciarFormulario (){
 
     const buttonContador = document.getElementById('inicia-contador');
     buttonContador.focus();
+    celular.focus();
+
     horaFinal = new Date().getTime();
     // Bloquear el botón después de iniciar el contador
     buttonContador.disabled = false;
