@@ -1,7 +1,7 @@
 // Variable global para almacenar el texto a copiar
 
 let horaInicial = 0;
-let horaFinal = 0;
+let fechaActual = '';
 
 // Función para agregar eventos por teclado
 function addEventListeners(element, callback, keys = ['Enter', 'Tab']) {
@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 function iniciarContador() {
     horaInicial = new Date().getTime();
+    fechaActual = new Date().toLocaleDateString(); // Obtener la fecha actual
     const idLlamada = document.getElementById('id-llamada');
     idLlamada.focus();
 
@@ -71,7 +72,7 @@ async function insertarTexto(){
         textob2b = `Nombre de quién atiende: ${nombreAtiende}, celular de quién atiende: ${celularAtiende}, días en los que atiende: ${diasAtiende}, horario en qué atiende: ${horarioAtiende}.`
     }
 
-    const totalTexto = `${idLlamadaValue}, y el cliente es ${nombreClient}, ${documentValue}, ${smnet}, ${tipiWeb}, ${observaciones}, ${tecnologia}, ${tiposervicio}, ${naturaleza}, ${celular}, aplica horario b2b: ${horarioB2B.value}. ${textob2b}`
+    const totalTexto = `hora ${horaInicial}, fecha ${fechaActual} ${idLlamadaValue}, y el cliente es ${nombreClient}, ${documentValue}, ${smnet}, ${tipiWeb}, ${observaciones}, ${tecnologia}, ${tiposervicio}, ${naturaleza}, ${celular}, aplica horario b2b: ${horarioB2B.value}. ${textob2b}`
 
 
     const resultado = document.getElementById('resultado');
