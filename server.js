@@ -1,8 +1,7 @@
 const express = require('express');
-const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
-const sqlite3 = require('sqlite3').verbose(); // Agrega esta línea para usar sqlite3
+const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
 const PORT = 3000;
@@ -66,6 +65,42 @@ app.post('/save-data', (req, res) => {
         } else {
             res.send('Datos guardados correctamente');
         }
+    });
+});
+
+// Ruta para obtener el tiempo total, tiempo global y promedio
+app.get('/tiempoTotal', (req, res) => {
+    db.serialize(() => {
+        db.all(`SELECT horaInicial, horaFinal FROM clientesData`, (err, rows) => {
+            if (err) {
+                console.error(err.message);
+                res.status(500).send('Error al obtener los datos');
+                return;
+            }
+
+            let tiempoGlobal = 0;
+            let cantidadIngresos = rows.length;
+
+            rows.forEach(row => {
+                let horaInicial = new Date(row.horaInicial);
+                let horaFinal = new Date(row.horaFinal);
+
+                if (!isNaN(horaInicial.getTime()) && !isNaN(horaFinal.getTime())) {
+                    let tiempoIngreso = (horaFinal - horaInicial) / 1000; // tiempo en segundos
+                    tiempoGlobal += tiempoIngreso;
+                } else {
+                    console.error(`Fechas inválidas para el ID`);
+                }
+            });
+
+            const minutosGlobal = Math.floor(tiempoGlobal / 60);
+            const segundosGlobal = tiempoGlobal % 60;
+            const promedio = cantidadIngresos > 0 ? tiempoGlobal / cantidadIngresos : 0;
+            const minutosPromedio = Math.floor(promedio / 60);
+            const segundosPromedio = promedio % 60;
+
+            res.json({ minutosGlobal, segundosGlobal, minutosPromedio, segundosPromedio, cantidadIngresos });
+        });
     });
 });
 

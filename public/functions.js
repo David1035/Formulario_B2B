@@ -156,6 +156,7 @@ function reiniciarFormulario (){
         buttonContador.disabled = false;
         buttonContador.focus();
     }
+
     
 }
 
@@ -168,3 +169,6 @@ function toggleB2BDetails() {
         b2bDetails.style.display = (horarioB2B && horarioB2B.value === 'SI') ? 'flex' : 'none';
     }
 }
+
+
+// Llama a la función para obtener y mostrar el tiempo total cuando se cargue la página
