@@ -18,5 +18,5 @@ async function fetchTiempoTotal() {
     }
 }
 
-
+// Llama a la función para obtener y mostrar el tiempo total cuando se cargue la página
 fetchTiempoTotal();
