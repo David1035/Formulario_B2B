@@ -74,10 +74,10 @@ async function insertarTexto() {
         textob2b = `Nombre de quién atiende: ${nombreAtiende}, celular de quién atiende: ${celularAtiende}, días en los que atiende: ${diasAtiende}, horario en qué atiende: ${horarioAtiende}.`;
     }
 
-    const totalTexto = `hora ${horaInicial}, fecha ${fechaActual} ${idLlamadaValue}, y el cliente es ${nombreClient}, ${documentValue}, ${smnet}, ${tipiWeb}, ${observaciones}, ${tecnologia}, ${tiposervicio}, ${naturaleza}, ${celular}, aplica horario b2b: ${horarioB2B.value}. ${textob2b}`;
+    const totalTexto = `Observaciones: ${observaciones}. ID de la llamada: ${idLlamadaValue}, SMNET: ${smnet}, Tecnología: ${tecnologia}, Servicio: ${tiposervicio}, Naturaleza ${naturaleza}, aplica horario b2b: ${horarioB2B.value}. ${textob2b}`;
 
     const resultado = document.getElementById('resultado');
-    resultado.innerHTML = `La hora inicial fue ${new Date(horaInicial).toLocaleTimeString('en-GB', { hour12: false })}, ${totalTexto}`;
+    resultado.innerHTML = totalTexto;
 
     try {
         await navigator.clipboard.writeText(totalTexto);
