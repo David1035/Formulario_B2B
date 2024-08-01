@@ -1,16 +1,20 @@
-// Función para agregar eventos por teclado
-function addEventListeners(element, callback, keys = ['Enter', 'Tab']) {
-    element.addEventListener('click', callback);
-    element.addEventListener('keydown', event => {
-        if (keys.includes(event.key)) {
-            event.preventDefault(); // previene comportamiento por defecto
-            callback();
-        }
-    });
-}
+// Variable global para almacenar el texto a copiar
 
 let horaInicial = 0;
 let horaFinal = 0;
+
+// Función para agregar eventos por teclado
+function addEventListeners(element, callback, keys = ['Enter', 'Tab']) {
+    if (element) {
+        element.addEventListener('click', callback);
+        element.addEventListener('keydown', event => {
+            if (keys.includes(event.key)) {
+                event.preventDefault(); // previene comportamiento por defecto
+                callback();
+            }
+        });
+    }
+}
 
 document.addEventListener('DOMContentLoaded', (event) => {
     const textarea = document.querySelector('.input-observaciones');
@@ -18,7 +22,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const copiar = document.getElementById('copiar')
     const reiniciar = document.getElementById('reiniciar')
     const horarioB2B = document.getElementById('horario_b2b');
-    const b2bDetails = document.getElementById('b2b-details');
+    //const b2bDetails = document.getElementById('b2b-details');
 
     textarea.addEventListener('input', function() {
         this.style.height = 'auto'; // Reset the height
@@ -43,7 +47,7 @@ function iniciarContador() {
 
 
 
-function insertarTexto(){
+async function insertarTexto(){
     const idLlamadaValue = document.getElementById('id-llamada')?.value;
     const nombreClient = document.getElementById('nombre-client')?.value;
     const documentValue = document.getElementById('document')?.value;
@@ -54,15 +58,36 @@ function insertarTexto(){
     const tiposervicio = document.getElementById('tiposervicio')?.value;
     const naturaleza = document.getElementById('naturaleza')?.value;
     const celular = document.getElementById('celular')?.value;
+    const horarioB2B = document.getElementById('horario_b2b');
+    
+    let textob2b = '';
+    if (horarioB2B.value === 'SI') {
+        
+        const nombreAtiende = document.getElementById('nombre_atiende')?.value;
+        const celularAtiende = document.getElementById('celular_atiende')?.value;
+        const diasAtiende = document.getElementById('dias_atiende')?.value;
+        const horarioAtiende = document.getElementById('horario_atiende')?.value;
 
-    const totalTexto = `${idLlamadaValue}, y el cliente es ${nombreClient}, ${documentValue}, ${smnet}, ${tipiWeb}, ${observaciones}, ${tecnologia}, ${tiposervicio}, ${naturaleza}, ${celular}`
+        textob2b = `Nombre de quién atiende: ${nombreAtiende}, celular de quién atiende: ${celularAtiende}, días en los que atiende: ${diasAtiende}, horario en qué atiende: ${horarioAtiende}.`
+    }
+
+    const totalTexto = `${idLlamadaValue}, y el cliente es ${nombreClient}, ${documentValue}, ${smnet}, ${tipiWeb}, ${observaciones}, ${tecnologia}, ${tiposervicio}, ${naturaleza}, ${celular}, aplica horario b2b: ${horarioB2B.value}. ${textob2b}`
 
 
     const resultado = document.getElementById('resultado');
     resultado.innerHTML = `La hora inicial fue ${new Date(horaInicial).toLocaleTimeString('en-GB', { hour12: false })}, ${totalTexto}`;
 
+
+    try {
+        await navigator.clipboard.writeText(totalTexto);
+    } catch (err) {
+        console.error('Failed to copy text: ', err);
+    }
+
     reiniciar.focus()
+
 }
+
 
 function reiniciarFormulario (){
     
@@ -77,24 +102,32 @@ function reiniciarFormulario (){
     document.getElementById('tiposervicio').value = '';
     document.getElementById('naturaleza').value = '';
     document.getElementById('celular').value = '';
+    document.getElementById('horario_b2b').value = 'NO'
+
+    toggleB2BDetails();
+
     const resultado = document.getElementById('resultado');
     resultado.innerHTML = ''
 
-    const buttonContador = document.getElementById('inicia-contador');
-    buttonContador.focus();
+    
 
     horaFinal = new Date().getTime();
+
     // Bloquear el botón después de iniciar el contador
-    buttonContador.disabled = false;
+    const buttonContador = document.getElementById('inicia-contador')
+    if (buttonContador) {
+        buttonContador.disabled = false;
+        buttonContador.focus();
+    }
+    
 }
+
 
 function toggleB2BDetails() {
     const horarioB2B = document.getElementById('horario_b2b');
     const b2bDetails = document.getElementById('b2b-details');
-    
-    if (horarioB2B.value === 'SI') {
-        b2bDetails.style.display = 'flex'; // Mostrar el div
-    } else {
-        b2bDetails.style.display = 'none'; // Ocultar el div
+
+    if (b2bDetails) {
+        b2bDetails.style.display = (horarioB2B && horarioB2B.value === 'SI') ? 'flex' : 'none';
     }
 }
