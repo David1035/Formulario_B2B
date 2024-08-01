@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 function iniciarContador() {
-    horaInicial = new Date().getTime();
-    fechaActual = new Date().toLocaleDateString(); // Obtener la fecha actual
+    horaInicial = new Date() //.toLocaleTimeString('en-GB', { hour12: false });
+    fechaActual = new Date() // Obtener la fecha actual
     const idLlamada = document.getElementById('id-llamada');
     idLlamada.focus();
 
@@ -112,7 +112,43 @@ function reiniciarFormulario (){
 
     
 
-    horaFinal = new Date().getTime();
+    horaFinal = new Date() //.toLocaleTimeString('en-GB', { hour12: false });
+
+    // Enviar datos al servidor
+    fetch('/save-data', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            horaInicial: new Date(horaInicial).toISOString(), // Convertir a formato ISO
+            horaFinal: new Date(horaFinal).toISOString(), // Convertir a formato ISO
+            fechaActual: fechaActual,
+            idLlamada: document.getElementById('id-llamada').value,
+            nombreClient: document.getElementById('nombre-client').value,
+            documentValue: document.getElementById('document').value,
+            smnet: document.getElementById('smnet').value,
+            tipiWeb: document.getElementById('tipiWeb').value,
+            observaciones: document.getElementById('observaciones').value,
+            tecnologia: document.getElementById('tecnologia').value,
+            tiposervicio: document.getElementById('tiposervicio').value,
+            naturaleza: document.getElementById('naturaleza').value,
+            celular: document.getElementById('celular').value,
+            horarioB2B: document.getElementById('horario_b2b').value,
+            nombreAtiende: document.getElementById('nombre_atiende')?.value || '',
+            celularAtiende: document.getElementById('celular_atiende')?.value || '',
+            diasAtiende: document.getElementById('dias_atiende')?.value || '',
+            horarioAtiende: document.getElementById('horario_atiende')?.value || ''
+        }),
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+    
 
     // Bloquear el botón después de iniciar el contador
     const buttonContador = document.getElementById('inicia-contador')
