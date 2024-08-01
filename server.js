@@ -19,31 +19,6 @@ const db = new sqlite3.Database('clientesTigo.db', (err) => {
     }
 });
 
-// Crea la tabla si no existe
-db.serialize(() => {
-    db.run(`CREATE TABLE IF NOT EXISTS clientesData (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        horaInicial TEXT,
-        horaFinal TEXT,
-        fechaActual DATE,
-        idLlamada TEXT,
-        nombreClient TEXT,
-        documentValue TEXT,
-        smnet TEXT,
-        tipiWeb TEXT,
-        observaciones TEXT,
-        tecnologia TEXT,
-        tiposervicio TEXT,
-        naturaleza TEXT,
-        celular TEXT,
-        horarioB2B TEXT,
-        nombreAtiende TEXT,
-        celularAtiende TEXT,
-        diasAtiende TEXT,
-        horarioAtiende TEXT
-    )`);
-});
-
 // Ruta para guardar los datos en la base de datos
 app.post('/save-data', (req, res) => {
     const data = req.body;
@@ -70,37 +45,35 @@ app.post('/save-data', (req, res) => {
 
 // Ruta para obtener el tiempo total, tiempo global y promedio
 app.get('/tiempoTotal', (req, res) => {
-    db.serialize(() => {
-        db.all(`SELECT horaInicial, horaFinal FROM clientesData`, (err, rows) => {
-            if (err) {
-                console.error(err.message);
-                res.status(500).send('Error al obtener los datos');
-                return;
+    db.all(`SELECT horaInicial, horaFinal FROM clientesData`, (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send('Error al obtener los datos');
+            return;
+        }
+
+        let tiempoGlobal = 0;
+        let cantidadIngresos = rows.length;
+
+        rows.forEach(row => {
+            let horaInicial = new Date(row.horaInicial);
+            let horaFinal = new Date(row.horaFinal);
+
+            if (!isNaN(horaInicial.getTime()) && !isNaN(horaFinal.getTime())) {
+                let tiempoIngreso = (horaFinal - horaInicial) / 1000; // tiempo en segundos
+                tiempoGlobal += tiempoIngreso;
+            } else {
+                console.error(`Fechas inválidas para el ID`);
             }
-
-            let tiempoGlobal = 0;
-            let cantidadIngresos = rows.length;
-
-            rows.forEach(row => {
-                let horaInicial = new Date(row.horaInicial);
-                let horaFinal = new Date(row.horaFinal);
-
-                if (!isNaN(horaInicial.getTime()) && !isNaN(horaFinal.getTime())) {
-                    let tiempoIngreso = (horaFinal - horaInicial) / 1000; // tiempo en segundos
-                    tiempoGlobal += tiempoIngreso;
-                } else {
-                    console.error(`Fechas inválidas para el ID`);
-                }
-            });
-
-            const minutosGlobal = Math.floor(tiempoGlobal / 60);
-            const segundosGlobal = tiempoGlobal % 60;
-            const promedio = cantidadIngresos > 0 ? tiempoGlobal / cantidadIngresos : 0;
-            const minutosPromedio = Math.floor(promedio / 60);
-            const segundosPromedio = promedio % 60;
-
-            res.json({ minutosGlobal, segundosGlobal, minutosPromedio, segundosPromedio, cantidadIngresos });
         });
+
+        const minutosGlobal = Math.floor(tiempoGlobal / 60);
+        const segundosGlobal = tiempoGlobal % 60;
+        const promedio = cantidadIngresos > 0 ? tiempoGlobal / cantidadIngresos : 0;
+        const minutosPromedio = Math.floor(promedio / 60);
+        const segundosPromedio = promedio % 60;
+
+        res.json({ minutosGlobal, segundosGlobal, minutosPromedio, segundosPromedio, cantidadIngresos });
     });
 });
 
