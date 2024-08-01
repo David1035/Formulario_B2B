@@ -65,7 +65,7 @@ document.getElementById('tecnologia').addEventListener('change', function() {
 
         const optionNaturaleza = document.createElement('option');
         optionNaturaleza.value = '';
-        optionNaturaleza.textContent = 'Seleccione la naturaleza del problema';
+        optionNaturaleza.textContent = 'Naturaleza';
         naturaleza.appendChild(optionNaturaleza);
     }
 });
@@ -85,7 +85,7 @@ document.getElementById('tiposervicio').addEventListener('change', function() {
     } else {
         const option = document.createElement('option');
         option.value = '';
-        option.textContent = 'Seleccione la naturaleza del problema';
+        option.textContent = 'Naturaleza';
         naturaleza.appendChild(option);
     }
 });
