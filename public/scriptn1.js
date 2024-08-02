@@ -9,9 +9,9 @@ async function fetchTiempoTotalN1() {
         const cantidadIngresos = data.cantidadIngresos;
 
         document.getElementById('conteoDiario').textContent = 
-            `Tiempo Total: ${minutosGlobal} minutos y ${segundosGlobal} segundos, ` +
-            `AHT: ${minutosPromedio} minutos y ${segundosPromedio} segundos, ` +
-            `Cantidad: ${cantidadIngresos}`;
+            `AHT: ${minutosPromedio}.${segundosPromedio.toFixed()}, ` +
+            `Total: ${minutosGlobal}.${segundosGlobal.toFixed()}, ` +
+            `Interacciones: ${cantidadIngresos}`;
     } catch (error) {
         console.error('Error al obtener el tiempo total:', error);
         document.getElementById('conteoDiario').textContent = 'Error al cargar los datos';
