@@ -10,18 +10,6 @@ const PORT = 3000;
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-const sqlite3 = require('sqlite3').verbose();
-
-const app = express();
-const PORT = 3000;
-
-// Configura bodyParser
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
-
 // Crea o abre la base de datos para clientesTigo.db
 const dbClientesTigo = new sqlite3.Database('clientesTigo.db', (err) => {
     if (err) {
