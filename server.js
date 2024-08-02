@@ -42,6 +42,28 @@ app.post('/save-data', (req, res) => {
         }
     });
 });
+app.post('/save-data-n1', (req, res) => {
+    const data = req.body;
+    const sql = `INSERT INTO clientesData (
+        horaInicial, horaFinal, fechaActual, idLlamada, nombreClient, documentValue, smnet,
+        tipiWeb, observaciones, tecnologia, tiposervicio, naturaleza, celular, horarioB2B,
+        nombreAtiende, celularAtiende, diasAtiende, horarioAtiende
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+    db.run(sql, [
+        data.horaInicial, data.horaFinal, data.fechaActual, data.idLlamada, data.nombreClient,
+        data.documentValue, data.smnet, data.tipiWeb, data.observaciones, data.tecnologia,
+        data.tiposervicio, data.naturaleza, data.celular, data.horarioB2B, data.nombreAtiende,
+        data.celularAtiende, data.diasAtiende, data.horarioAtiende
+    ], (err) => {
+        if (err) {
+            console.error('Error al guardar en la base de datos:', err.message);
+            res.status(500).send('Error al guardar en la base de datos');
+        } else {
+            res.send('Datos guardados correctamente');
+        }
+    });
+});
 
 // Ruta para obtener el tiempo total, tiempo global y promedio
 app.get('/tiempoTotal', (req, res) => {
