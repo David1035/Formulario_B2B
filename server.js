@@ -10,42 +10,84 @@ const PORT = 3000;
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Función para conectar y guardar datos en la base de datos adecuada
-function guardarDatosEnDB(dbName, data) {
-    const db = new sqlite3.Database(dbName);
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const sqlite3 = require('sqlite3').verbose();
+
+const app = express();
+const PORT = 3000;
+
+// Configura bodyParser
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Crea o abre la base de datos para clientesTigo.db
+const dbClientesTigo = new sqlite3.Database('clientesTigo.db', (err) => {
+    if (err) {
+        console.error('Error al conectar a la base de datos clientesTigo.db:', err.message);
+    } else {
+        console.log('Conectado a la base de datos clientesTigo.db.');
+    }
+});
+
+// Crea o abre la base de datos para clientesTigon1.db
+const dbClientesTigon1 = new sqlite3.Database('clientesTigon1.db', (err) => {
+    if (err) {
+        console.error('Error al conectar a la base de datos clientesTigon1.db:', err.message);
+    } else {
+        console.log('Conectado a la base de datos clientesTigon1.db.');
+    }
+});
+
+// Ruta para guardar los datos en la base de datos clientesTigo.db
+app.post('/save-data', (req, res) => {
+    const data = req.body;
     const sql = `INSERT INTO clientesData (
         horaInicial, horaFinal, fechaActual, idLlamada, nombreClient, documentValue, smnet,
         tipiWeb, observaciones, tecnologia, tiposervicio, naturaleza, celular, horarioB2B,
         nombreAtiende, celularAtiende, diasAtiende, horarioAtiende
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-    db.run(sql, [
+    dbClientesTigo.run(sql, [
         data.horaInicial, data.horaFinal, data.fechaActual, data.idLlamada, data.nombreClient,
         data.documentValue, data.smnet, data.tipiWeb, data.observaciones, data.tecnologia,
         data.tiposervicio, data.naturaleza, data.celular, data.horarioB2B, data.nombreAtiende,
         data.celularAtiende, data.diasAtiende, data.horarioAtiende
     ], (err) => {
         if (err) {
-            console.error('Error al guardar en la base de datos:', err.message);
+            console.error('Error al guardar en la base de datos clientesTigo.db:', err.message);
+            res.status(500).send('Error al guardar en la base de datos clientesTigo.db');
         } else {
-            console.log(`Datos guardados correctamente en ${dbName}`);
+            res.send('Datos guardados correctamente en clientesTigo.db');
         }
     });
-
-    db.close();
-}
-
-// Ruta para guardar los datos en la base de datos
-app.post('/save-data', (req, res) => {
-    const { dbName, ...data } = req.body;
-
-    if (dbName && data) {
-        guardarDatosEnDB(dbName, data);
-        res.send('Datos guardados correctamente');
-    } else {
-        res.status(400).send('Datos incompletos');
-    }
 });
+
+// Ruta para guardar los datos en la base de datos clientesTigon1.db
+app.post('/save-data-n1', (req, res) => {
+    const data = req.body;
+    const sql = `INSERT INTO clientesData (
+        horaInicial, horaFinal, fechaActual, idLlamada, nombreClient, documentValue, smnet,
+        tipiWeb, observaciones, tecnologia, tiposervicio, naturaleza, celular, horarioB2B,
+        nombreAtiende, celularAtiende, diasAtiende, horarioAtiende
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+    dbClientesTigon1.run(sql, [
+        data.horaInicial, data.horaFinal, data.fechaActual, data.idLlamada, data.nombreClient,
+        data.documentValue, data.smnet, data.tipiWeb, data.observaciones, data.tecnologia,
+        data.tiposervicio, data.naturaleza, data.celular, data.horarioB2B, data.nombreAtiende,
+        data.celularAtiende, data.diasAtiende, data.horarioAtiende
+    ], (err) => {
+        if (err) {
+            console.error('Error al guardar en la base de datos clientesTigon1.db:', err.message);
+            res.status(500).send('Error al guardar en la base de datos clientesTigon1.db');
+        } else {
+            res.send('Datos guardados correctamente en clientesTigon1.db');
+        }
+    });
+});
+
 
 // Ruta para obtener el tiempo total, tiempo global y promedio
 app.get('/tiempoTotal', (req, res) => {

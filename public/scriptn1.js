@@ -41,12 +41,11 @@ async function enviarDatosAlServidor() {
         nombreAtiende: document.getElementById('nombre_atiende')?.value || '',
         celularAtiende: document.getElementById('celular_atiende')?.value || '',
         diasAtiende: document.getElementById('dias_atiende')?.value || '',
-        horarioAtiende: document.getElementById('horario_atiende')?.value || '',
-        dbName: 'clientesTigon1.db' // Especifica la base de datos
+        horarioAtiende: document.getElementById('horario_atiende')?.value || ''
     };
 
     try {
-        const response = await fetch('/save-data', {
+        const response = await fetch('/save-data-n1', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -64,6 +63,7 @@ async function enviarDatosAlServidor() {
         console.error('Error al enviar los datos al servidor:', error);
     }
 }
+
 
 
 const opcionesTiposervicio = {

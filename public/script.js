@@ -41,8 +41,7 @@ async function enviarDatosAlServidor() {
         nombreAtiende: document.getElementById('nombre_atiende')?.value || '',
         celularAtiende: document.getElementById('celular_atiende')?.value || '',
         diasAtiende: document.getElementById('dias_atiende')?.value || '',
-        horarioAtiende: document.getElementById('horario_atiende')?.value || '',
-        dbName: 'clientesTigo.db' // Especifica la base de datos
+        horarioAtiende: document.getElementById('horario_atiende')?.value || ''
     };
 
     try {
