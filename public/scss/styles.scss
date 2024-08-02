@@ -12,6 +12,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    .title-n2{
+      color: #003300;
+      font-weight: bold;
+      padding: 10px;
+    }
 
     .main__container {
         width: auto;

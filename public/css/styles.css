@@ -13,6 +13,11 @@
   flex-direction: column;
   align-items: center;
 }
+.formulario__capturar__datos .title-n2 {
+  color: #003300;
+  font-weight: bold;
+  padding: 10px;
+}
 .formulario__capturar__datos .main__container {
   width: auto;
   max-width: 400px;
