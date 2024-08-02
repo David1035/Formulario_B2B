@@ -1,6 +1,6 @@
-async function fetchTiempoTotal() {
+async function fetchTiempoTotalN1() {
     try {
-        const response = await fetch('/tiempoTotal');
+        const response = await fetch('/tiempoTotalN1');
         const data = await response.json();
         const minutosGlobal = data.minutosGlobal;
         const segundosGlobal = data.segundosGlobal;
@@ -9,8 +9,8 @@ async function fetchTiempoTotal() {
         const cantidadIngresos = data.cantidadIngresos;
 
         document.getElementById('conteoDiario').textContent = 
-            `Tiempo Total: ${minutosGlobal}.${segundosGlobal.toFixed()}, ` +
-            `AHT: ${minutosPromedio}.${segundosPromedio.toFixed()}, ` +
+            `Tiempo Total: ${minutosGlobal} minutos y ${segundosGlobal} segundos, ` +
+            `AHT: ${minutosPromedio} minutos y ${segundosPromedio} segundos, ` +
             `Cantidad: ${cantidadIngresos}`;
     } catch (error) {
         console.error('Error al obtener el tiempo total:', error);
@@ -18,8 +18,9 @@ async function fetchTiempoTotal() {
     }
 }
 
-// Llama a la función para obtener y mostrar el tiempo total cuando se cargue la página
-fetchTiempoTotal();
+// Llama a la función para que se ejecute cuando se cargue la página
+document.addEventListener('DOMContentLoaded', fetchTiempoTotalN1);
+
 
 async function enviarDatosAlServidor() {
     // Recopila los datos del formulario
@@ -62,6 +63,7 @@ async function enviarDatosAlServidor() {
     } catch (error) {
         console.error('Error al enviar los datos al servidor:', error);
     }
+    fetchTiempoTotalN1();
 }
 
 

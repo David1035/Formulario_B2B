@@ -77,14 +77,14 @@ app.post('/save-data-n1', (req, res) => {
 });
 
 
-// Ruta para obtener el tiempo total, tiempo global y promedio
+// Ruta para obtener el tiempo total desde clientesTigo.db
 app.get('/tiempoTotal', (req, res) => {
-    const db = new sqlite3.Database('clientesTigo.db'); // Ajusta esta línea según sea necesario
+    const query = `SELECT horaInicial, horaFinal FROM clientesData`;
 
-    db.all(`SELECT horaInicial, horaFinal FROM clientesData`, (err, rows) => {
+    dbClientesTigo.all(query, (err, rows) => {
         if (err) {
             console.error(err.message);
-            res.status(500).send('Error al obtener los datos');
+            res.status(500).send('Error al obtener los datos de clientesTigo.db');
             return;
         }
 
@@ -99,7 +99,7 @@ app.get('/tiempoTotal', (req, res) => {
                 let tiempoIngreso = (horaFinal - horaInicial) / 1000; // tiempo en segundos
                 tiempoGlobal += tiempoIngreso;
             } else {
-                console.error('Fechas inválidas para el ID');
+                console.error('Fechas inválidas en clientesTigo.db');
             }
         });
 
@@ -111,9 +111,44 @@ app.get('/tiempoTotal', (req, res) => {
 
         res.json({ minutosGlobal, segundosGlobal, minutosPromedio, segundosPromedio, cantidadIngresos });
     });
-
-    db.close();
 });
+
+// Ruta para obtener el tiempo total desde clientesTigon1.db
+app.get('/tiempoTotalN1', (req, res) => {
+    const query = `SELECT horaInicial, horaFinal FROM clientesData`;
+
+    dbClientesTigon1.all(query, (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send('Error al obtener los datos de clientesTigon1.db');
+            return;
+        }
+
+        let tiempoGlobal = 0;
+        let cantidadIngresos = rows.length;
+
+        rows.forEach(row => {
+            let horaInicial = new Date(row.horaInicial);
+            let horaFinal = new Date(row.horaFinal);
+
+            if (!isNaN(horaInicial.getTime()) && !isNaN(horaFinal.getTime())) {
+                let tiempoIngreso = (horaFinal - horaInicial) / 1000; // tiempo en segundos
+                tiempoGlobal += tiempoIngreso;
+            } else {
+                console.error('Fechas inválidas en clientesTigon1.db');
+            }
+        });
+
+        const minutosGlobal = Math.floor(tiempoGlobal / 60);
+        const segundosGlobal = tiempoGlobal % 60;
+        const promedio = cantidadIngresos > 0 ? tiempoGlobal / cantidadIngresos : 0;
+        const minutosPromedio = Math.floor(promedio / 60);
+        const segundosPromedio = promedio % 60;
+
+        res.json({ minutosGlobal, segundosGlobal, minutosPromedio, segundosPromedio, cantidadIngresos });
+    });
+});
+
 
 // Cierra la base de datos cuando el servidor se detiene
 process.on('SIGINT', () => {

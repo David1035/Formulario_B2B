@@ -62,6 +62,7 @@ async function enviarDatosAlServidor() {
     } catch (error) {
         console.error('Error al enviar los datos al servidor:', error);
     }
+    fetchTiempoTotal();
 }
 
 
