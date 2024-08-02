@@ -115,17 +115,21 @@
 }
 
 #resultado {
-  margin-top: 20px;
   width: 420px;
-  height: 70px;
+  min-height: 20px;
   text-align: center;
+  padding: 10px;
+  line-height: 1.2;
+  color: #003300;
 }
 
 #conteoDiario {
-  margin-top: 5px;
   width: 300px;
-  height: 30px;
+  min-height: 10px;
   text-align: center;
+  padding: 10px;
+  color: #003300;
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=styles.css.map */
