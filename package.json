@@ -4,7 +4,8 @@
   "description": "",
   "main": "pruebas.js",
   "scripts": {
-    "sass": "sass --watch public/scss:public/css"
+    "sass": "sass --watch public/scss:public/css",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +15,13 @@
     "express": "^4.19.2",
     "sass": "^1.77.8",
     "sqlite3": "^5.1.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/David1035/Formulario_B2B.git"
+  },
+  "bugs": {
+    "url": "https://github.com/David1035/Formulario_B2B/issues"
+  },
+  "homepage": "https://github.com/David1035/Formulario_B2B#readme"
 }
