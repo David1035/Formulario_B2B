@@ -1,6 +1,6 @@
-async function fetchTiempoTotal() {
+async function fetchTiempoTotalN1() {
     try {
-        const response = await fetch('/tiempoTotal');
+        const response = await fetch('/tiempoTotalN1');
         const data = await response.json();
         const minutosGlobal = data.minutosGlobal;
         const segundosGlobal = data.segundosGlobal;
@@ -18,8 +18,9 @@ async function fetchTiempoTotal() {
     }
 }
 
-// Llama a la función para obtener y mostrar el tiempo total cuando se cargue la página
-fetchTiempoTotal();
+// Llama a la función para que se ejecute cuando se cargue la página
+document.addEventListener('DOMContentLoaded', fetchTiempoTotalN1);
+
 
 async function enviarDatosAlServidor() {
     // Recopila los datos del formulario
@@ -45,7 +46,7 @@ async function enviarDatosAlServidor() {
     };
 
     try {
-        const response = await fetch('/save-data', {
+        const response = await fetch('/save-data-n1', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -62,8 +63,9 @@ async function enviarDatosAlServidor() {
     } catch (error) {
         console.error('Error al enviar los datos al servidor:', error);
     }
-    fetchTiempoTotal();
+    fetchTiempoTotalN1();
 }
+
 
 
 const opcionesTiposervicio = {

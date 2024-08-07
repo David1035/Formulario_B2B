@@ -1,0 +1,140 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.formulario__capturar__datos {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.formulario__capturar__datos .title-n2 {
+  color: #003300;
+  font-weight: bold;
+  padding: 10px;
+}
+.formulario__capturar__datos .main__container {
+  width: auto;
+  max-width: 400px;
+  background-color: #d5e9e8;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 50px 10px;
+}
+.formulario__capturar__datos .main__container .input__group--items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 120px;
+  border: none;
+  border-radius: 8px;
+}
+.formulario__capturar__datos .main__container .input__group--items label {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  color: black;
+  font-weight: bold;
+}
+.formulario__capturar__datos .main__container .input__group--items input {
+  border-radius: 5px;
+  border: none;
+  height: 24px;
+  font-weight: bold;
+  color: #2E4053;
+}
+.formulario__capturar__datos .main__container .input__group--items input:hover, .formulario__capturar__datos .main__container .input__group--items input:focus, .formulario__capturar__datos .main__container .input__group--items input:active {
+  background-color: #C8E6C9;
+}
+.formulario__capturar__datos .main__container .input__group--items select {
+  font-weight: bold;
+  color: #0E6251;
+}
+.formulario__capturar__datos .main__container .input__group--button-llamada {
+  width: 80px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 17px;
+  border: none;
+  color: black;
+  font-weight: bold;
+}
+.formulario__capturar__datos .main__container .input__group--button-llamada:hover, .formulario__capturar__datos .main__container .input__group--button-llamada:focus, .formulario__capturar__datos .main__container .input__group--button-llamada:active {
+  background-color: lightblue;
+}
+.formulario__capturar__datos .main__container .input__group--button-llamada.clicked {
+  background-color: lightgreen;
+}
+.formulario__capturar__datos .main__container .input__group--items-observaciones {
+  min-width: 290px;
+  height: auto;
+}
+.formulario__capturar__datos .main__container .input__group--items-observaciones .input-observaciones {
+  width: 100%;
+  height: auto;
+  resize: none;
+  overflow: hidden;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #212F3C;
+}
+.formulario__capturar__datos .main__container .input__group--items-observaciones .input-observaciones:hover, .formulario__capturar__datos .main__container .input__group--items-observaciones .input-observaciones:focus, .formulario__capturar__datos .main__container .input__group--items-observaciones .input-observaciones:active {
+  background-color: #C8E6C9;
+}
+.formulario__capturar__datos .main__container .input__group--items-button {
+  width: 120px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+}
+.formulario__capturar__datos .main__container .input__group--items-button .item-button {
+  border: none;
+  border-radius: 10px;
+  color: #003300;
+  font-weight: bold;
+}
+.formulario__capturar__datos .main__container .input__group--items-button .item-button:hover, .formulario__capturar__datos .main__container .input__group--items-button .item-button:focus, .formulario__capturar__datos .main__container .input__group--items-button .item-button:active {
+  background-color: lightblue;
+}
+.formulario__capturar__datos .main__container .input__group--items-button .item-button.clicked {
+  background-color: lightgreen;
+}
+.formulario__capturar__datos .main__container .input__group--items-llamada__oculto {
+  max-width: 100%;
+  display: none;
+  gap: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #FBE9E7;
+}
+
+#resultado {
+  width: 420px;
+  min-height: 20px;
+  text-align: center;
+  padding: 10px;
+  line-height: 1.2;
+  color: #003300;
+}
+
+#conteoDiario {
+  width: 300px;
+  min-height: 10px;
+  text-align: center;
+  padding: 10px;
+  color: #003300;
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=styles.css.map */
