@@ -53,15 +53,11 @@ function iniciarContador() {
 
 async function insertarTexto() {
     const idLlamadaValue = document.getElementById('id-llamada')?.value;
-    const nombreClient = document.getElementById('nombre-client')?.value;
-    const documentValue = document.getElementById('document')?.value;
     const smnet = document.getElementById('smnet')?.value;
-    const tipiWeb = document.getElementById('tipiWeb')?.value;
     const observaciones = document.getElementById('observaciones')?.value;
     const tecnologia = document.getElementById('tecnologia')?.value;
     const tiposervicio = document.getElementById('tiposervicio')?.value;
     const naturaleza = document.getElementById('naturaleza')?.value;
-    const celular = document.getElementById('celular')?.value;
     const horarioB2B = document.getElementById('horario_b2b');
 
     let textob2b = '';
@@ -74,7 +70,7 @@ async function insertarTexto() {
         textob2b = `Nombre de quién atiende: ${nombreAtiende}, celular de quién atiende: ${celularAtiende}, días en los que atiende: ${diasAtiende}, horario en qué atiende: ${horarioAtiende}.`;
     }
 
-    const totalTexto = `Observaciones: ${observaciones}. ID de la llamada: ${idLlamadaValue}, SMNET: ${smnet}, Tecnología: ${tecnologia}, Servicio: ${tiposervicio}, Naturaleza ${naturaleza}, aplica horario b2b: ${horarioB2B.value}. ${textob2b}`;
+    const totalTexto = `Observaciones: ${observaciones}. ID de la llamada: ${idLlamadaValue}, SMNET: ${smnet}, Tecnología: ${tecnologia}, Servicio: ${tiposervicio}, Naturaleza ${naturaleza}, ¿aplica horario b2b?: ${horarioB2B.value}. ${textob2b}`;
 
     const resultado = document.getElementById('resultado');
     resultado.innerHTML = totalTexto;
@@ -106,6 +102,10 @@ async function reiniciarFormulario() {
     document.getElementById('naturaleza').value = '';
     document.getElementById('celular').value = '';
     document.getElementById('horario_b2b').value = 'NO';
+    document.getElementById('nombre_atiende').value = '';
+    document.getElementById('celular_atiende').value = '';
+    document.getElementById('dias_atiende').value = 'Lunes a Viernes';
+    document.getElementById('horario_atiende').value = '';
 
     toggleB2BDetails();
 
