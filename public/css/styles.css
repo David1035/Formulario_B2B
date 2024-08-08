@@ -18,6 +18,11 @@
   font-weight: bold;
   padding: 10px;
 }
+.formulario__capturar__datos .title-n2 a{
+  text-decoration: none;
+  color: #003300;
+  font-weight: bold;
+}
 .formulario__capturar__datos .main__container {
   width: auto;
   max-width: 400px;
